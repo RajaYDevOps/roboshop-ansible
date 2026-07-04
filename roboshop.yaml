@@ -4,7 +4,7 @@
   vars:
     instances: ["mongodb","redis","mysql","rabbitmq"]
     image_id: ami-0220d79f3f480ecf5
-    domain name: daws-90s.sbs
+    #domain name: daws-90s.sbs
   tasks:
   - name: create ec2 instances
     amazon.aws.ec2_instance:
