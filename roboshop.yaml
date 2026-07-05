@@ -79,11 +79,10 @@
 
   - name: delete Ec2 instances
     amazon.aws.ec2_instance:
-    state: absent
-    name: "roboshop-{{ item }}"
+     state: absent
+     name: "roboshop-{{ item }}"
     loop: "{{ instances }}"
-    when: 
-    - action == "delete"
+    when: action == "delete"
     
 
 
