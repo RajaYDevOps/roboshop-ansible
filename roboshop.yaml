@@ -2,9 +2,10 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb","redis","mysql","rabbitmq"]
+    instances: ["mongodb","redis","mysql","rabbitmq","frontend"]
     image_id: ami-0220d79f3f480ecf5
     domain_name: daws-90s.sbs
+    action: create
   tasks:
   - name: create ec2 instances
     amazon.aws.ec2_instance:
@@ -16,6 +17,7 @@
       - "roboshop-{{ item }}"
       - roboshop-common
     loop: "{{ instances }}"
+    when: action == "create"
     register: ec2_output
 
   # - name: print output
@@ -37,6 +39,7 @@
       ttl: 1
       overwrite: true
     loop: "{{ ec2_output.results }}"
+    when: action == "create"
 
   - name: create R53 record for frontend
     amazon.aws.route53:
@@ -48,6 +51,40 @@
       ttl: 1
       overwrite: true
     loop: "{{ ec2_output.results }}"
-    when: item.item == "frontend"
+    when: 
+    - item.item == "frontend"
+    - action == "create"
+
+  - name: delete R53 records
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "{{ item }}.{{ domain_name }}" # mongodb.daws-90s.sbs
+      type: A
+      ttl: 1
+    loop: "{{ instances }}" 
+    when: action == "delete" 
+
+  - name: delete R53 records for frontend
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}" #daws-90s.sbs
+      type: A
+      ttl: 1
+    loop: "{{ instances }}" 
+    when: 
+    - action == "delete"
+    - item == "frontend"
+
+  - name: delete Ec2 instances
+    amazon.aws.ec2_instance:
+    state: absent
+    name: "roboshop-{{ item }}"
+    loop: "{{ instances }}"
+    when: 
+    - action == "delete"
+    
+
 
       
