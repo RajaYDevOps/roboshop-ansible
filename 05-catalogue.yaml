@@ -61,6 +61,21 @@
      msg: "{{ catalogue_output }}"
     tags:
     - mongodb
+  - name: Load products
+    shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
+    when: catalogue_output.stdout | int < 0
+    tags:
+    - mongodb
+  - name: Reload daemon
+    systemd_service:
+      name: catalogue
+      daemon_reload: true
+  - name: enable and start catalogue
+    service:
+      name: catalogue
+      state: restarted
+      enabled: yes
+  
 
 
 
