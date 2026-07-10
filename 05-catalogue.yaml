@@ -8,7 +8,7 @@
     package:
       name: nodejs
       state: present
-  - name: create rosboshop system user
+  - name: create roboshop system user
     user:
       name: roboshop
       system: true
