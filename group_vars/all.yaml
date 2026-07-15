@@ -3,3 +3,5 @@ ansible_password: DevOps321
 MONGODB_HOST: mongodb.daws-90s.sbs
 REDIS_HOST: redis.daws-90s.sbs
 CATALOGUE_HOST: catalogue.daws-90s.sbs
+MYSQL_HOST: mysql.daws-90s.sbs
+CART_HOST: cart.daws-90s.sbs
