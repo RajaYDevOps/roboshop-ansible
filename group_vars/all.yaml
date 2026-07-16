@@ -7,3 +7,6 @@ MYSQL_HOST: mysql.daws-90s.sbs
 CART_HOST: cart.daws-90s.sbs
 RABBITMQ_HOST: rabbitmq.daws-90s.sbs
 USER_HOST: user.daws-90s.sbs
+PAYMENT_HOST: payment.daws-90s.sbs
+SHIPPING_HOST: shipping.daws-90s.sbs
+#FRONTEND_HOST: frontend.daws-90s.sbs
