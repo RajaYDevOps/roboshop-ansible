@@ -49,10 +49,10 @@
     template:
       src: shipping.service.j2
       dest: /etc/systemd/system/shipping.service
-  # - name: install python dependencies
-  #   pip:
-  #     name: PyMySQL
-  #     executable: pip3.9
+  - name: install python dependencies
+    pip:
+      name: PyMySQL
+      executable: pip3.9
 
   - name: Load mysql data
     community.mysql.mysql_db:
