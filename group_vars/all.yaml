@@ -5,3 +5,5 @@ REDIS_HOST: redis.daws-90s.sbs
 CATALOGUE_HOST: catalogue.daws-90s.sbs
 MYSQL_HOST: mysql.daws-90s.sbs
 CART_HOST: cart.daws-90s.sbs
+RABBITMQ_HOST: rabbitmq.daws-90s.sbs
+USER_HOST: user.daws-90s.sbs
